@@ -6,6 +6,7 @@ import EditIcon from "../../../../../components/fundamentals/icons/edit-icon"
 import TrashIcon from "../../../../../components/fundamentals/icons/trash-icon"
 import Actionables from "../../../../../components/molecules/actionables"
 import Table from "../../../../../components/molecules/table"
+import OptionsModal from "./options-modal"
 
 type Props = {
   variants: ProductVariant[]
@@ -17,12 +18,77 @@ type Props = {
 }
 
 export const useVariantsTableColumns = () => {
+
   const columns = useMemo<Column<ProductVariant>[]>(
+
     () => [
       {
-        Header: "Title",
-        id: "title",
-        accessor: "title",
+        Header: "Swatch",
+        id: "swatch",
+        accessor: "metadata.swatch",
+        Cell: ({ cell }) => {
+          return cell.value ? (
+            <img src={cell.value} width={50} />
+          ) : (
+            <span className="text-grey-50">-</span>
+          )
+        },
+      },
+      {
+        Header: "Thumbnail",
+        id: "thumbnail",
+        accessor: "metadata.main_image",
+        Cell: ({ cell }) => {
+          return cell.value ? (
+            <img src={cell.value} width={80} />
+          ) : (
+            <span className="text-grey-50">-</span>
+          )
+        },
+      },
+      {
+        Header: "Handle",
+        id: "handle",
+        accessor: "metadata.handle",
+      },
+      {
+        Header: "Option 1",
+        id: "option-1",
+        accessor: "options[0].value",
+        maxWidth: 264,
+        Cell: ({ cell }) => {
+          return cell.value ? (
+            cell.value
+          ) : (
+            <span className="text-grey-50">-</span>
+          )
+        },
+      },
+      {
+        Header: "Option 2",
+        id: "option-2",
+        accessor: "options[1].value",
+        maxWidth: 264,
+        Cell: ({ cell }) => {
+          return cell.value ? (
+            cell.value
+          ) : (
+            <span className="text-grey-50">-</span>
+          )
+        },
+      },
+      {
+        Header: "Option 3",
+        id: "option-3",
+        accessor: "options[2].value",
+        maxWidth: 264,
+        Cell: ({ cell }) => {
+          return cell.value ? (
+            cell.value
+          ) : (
+            <span className="text-grey-50">-</span>
+          )
+        },
       },
       {
         Header: "SKU",
@@ -37,38 +103,38 @@ export const useVariantsTableColumns = () => {
           )
         },
       },
-      {
-        Header: "EAN",
-        id: "ean",
-        accessor: "ean",
-        maxWidth: 264,
-        Cell: ({ cell }) => {
-          return cell.value ? (
-            cell.value
-          ) : (
-            <span className="text-grey-50">-</span>
-          )
-        },
-      },
-      {
-        Header: () => {
-          return (
-            <div className="text-right">
-              <span>Inventory</span>
-            </div>
-          )
-        },
-        id: "inventory",
-        accessor: "inventory_quantity",
-        maxWidth: 56,
-        Cell: ({ cell }) => {
-          return (
-            <div className="text-right">
-              <span>{cell.value}</span>
-            </div>
-          )
-        },
-      },
+      // {
+      //   Header: "EAN",
+      //   id: "ean",
+      //   accessor: "ean",
+      //   maxWidth: 264,
+      //   Cell: ({ cell }) => {
+      //     return cell.value ? (
+      //       cell.value
+      //     ) : (
+      //       <span className="text-grey-50">-</span>
+      //     )
+      //   },
+      // },
+      // {
+      //   Header: () => {
+      //     return (
+      //       <div className="text-right">
+      //         <span>Inventory</span>
+      //       </div>
+      //     )
+      //   },
+      //   id: "inventory",
+      //   accessor: "inventory_quantity",
+      //   maxWidth: 56,
+      //   Cell: ({ cell }) => {
+      //     return (
+      //       <div className="text-right">
+      //         <span>{cell.value}</span>
+      //       </div>
+      //     )
+      //   },
+      // },
     ],
     []
   )
